@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet de Flocons de Neige</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #001f3f; /* Couleur de fond pour mettre en valeur les flocons */
+            display: flex; /* Utilisation de flexbox pour centrer le contenu */
+            justify-content: center; /* Centrer horizontalement */
+            align-items: center; /* Centrer verticalement */
+            height: 100vh; /* La hauteur de la fenêtre pour que le centrage soit en pleine page */
+            position: relative; /* Assurer que les éléments positionnés absolument seront relativement au body */
+        }
+
+        .snowflake {
+            position: absolute;
+            color: #ffffff;
+            font-size: 1em;
+            user-select: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        img {
+            z-index: 10; /* Placer l'image au-dessus des flocons */
+            max-width: 100%; /* Limiter la largeur de l'image à la taille de l'écran */
+            max-height: 100%; /* Limiter la hauteur de l'image à la taille de l'écran */
+        }
+    </style>
+</head>
+<body>
+    <!-- Image animée centrée à la fois horizontalement et verticalement -->
+    <img src="/assets/gif/image1.gif" alt="animation">
+
+    <script>
+        // Crée des flocons aléatoires
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄'; // Symbole Unicode pour un flocon de neige
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Taille aléatoire entre 10px et 20px
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Durée aléatoire de chute
+            document.body.appendChild(snowflake);
+
+            // Supprime les flocons après leur animation
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+
+        // Génère un flocon toutes les 100ms
+        setInterval(createSnowflake, 100);
+    </script>
+</body>
+</html>
+
+
+
+
